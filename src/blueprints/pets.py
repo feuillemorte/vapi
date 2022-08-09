@@ -1,5 +1,6 @@
 """The blueprint related to the /pets/ endpoint functionality."""
 from datetime import datetime
+from datetime import timezone
 
 import marshmallow as ma
 from flask.views import MethodView
@@ -16,8 +17,8 @@ class PetSchema(ma.Schema):
 
     id = ma.fields.Int(dump_only=True, required=False)
     name = ma.fields.String()
-    created = ma.fields.DateTime(format="%Y-%m-%d %H:%M:%S", required=False, missing=datetime.now)
-    updated = ma.fields.DateTime(format="%Y-%m-%d %H:%M:%S", required=False, missing=datetime.now)
+    created = ma.fields.AwareDateTime(format="%Y-%m-%dT%H:%M:%SZ", required=False, missing=datetime.now(timezone.utc))
+    updated = ma.fields.AwareDateTime(format="%Y-%m-%dT%H:%M:%SZ", required=False, missing=datetime.now(timezone.utc))
 
 
 pets_blueprint = Blueprint("pets", "pets", url_prefix="/pets", description="Operations on pets")
