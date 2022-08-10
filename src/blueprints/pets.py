@@ -12,13 +12,19 @@ from src import db
 TABLE_NAME = "pets"
 
 
-class PetSchema(ma.Schema):
-    """Pet schema for API requests/responses."""
+class PetResponseSchema(ma.Schema):
+    """Pet schema for API responses."""
 
     id = ma.fields.Int(dump_only=True, required=False)
     name = ma.fields.String()
     created = ma.fields.AwareDateTime(format="%Y-%m-%dT%H:%M:%SZ", required=False, missing=datetime.now(timezone.utc))
     updated = ma.fields.AwareDateTime(format="%Y-%m-%dT%H:%M:%SZ", required=False, missing=datetime.now(timezone.utc))
+
+
+class PetRequestSchema(ma.Schema):
+    """Pet schema for API POST/PUT requests."""
+
+    name = ma.fields.String()
 
 
 pets_blueprint = Blueprint("pets", "pets", url_prefix="/pets", description="Operations on pets")
@@ -27,14 +33,14 @@ pets_blueprint = Blueprint("pets", "pets", url_prefix="/pets", description="Oper
 @pets_blueprint.route("/")
 class Pets(MethodView):
     @staticmethod
-    @pets_blueprint.response(200, PetSchema(many=True))
+    @pets_blueprint.response(200, PetResponseSchema(many=True))
     def get():
         """Finds all pets in the database."""
         return db.select_all(TABLE_NAME)
 
     @staticmethod
-    @pets_blueprint.arguments(PetSchema)
-    @pets_blueprint.response(201, PetSchema)
+    @pets_blueprint.arguments(PetRequestSchema)
+    @pets_blueprint.response(201, PetResponseSchema)
     def post(data):
         """Adds a new pet."""
         if not data.get("name"):
@@ -50,7 +56,7 @@ class Pets(MethodView):
 @pets_blueprint.route("/id/<pet_id>")
 class PetsById(MethodView):
     @staticmethod
-    @pets_blueprint.response(200, PetSchema)
+    @pets_blueprint.response(200, PetResponseSchema)
     def get(pet_id):
         """Gets pet by ID."""
         item = db.select_by_id(TABLE_NAME, pet_id)
@@ -59,8 +65,8 @@ class PetsById(MethodView):
         return {}
 
     @staticmethod
-    @pets_blueprint.arguments(PetSchema)
-    @pets_blueprint.response(200, PetSchema)
+    @pets_blueprint.arguments(PetRequestSchema)
+    @pets_blueprint.response(200, PetResponseSchema)
     def put(data, pet_id):
         """Updates an existing pet."""
         if not data.get("name"):
@@ -91,7 +97,7 @@ class PetsById(MethodView):
 @pets_blueprint.route("/name/<pet_name>")
 class PetsByName(MethodView):
     @staticmethod
-    @pets_blueprint.response(200, PetSchema)
+    @pets_blueprint.response(200, PetResponseSchema)
     def get(pet_name):
         """Gets pet by name."""
         item = list(db.select_all(TABLE_NAME, where=f"name='{pet_name}' COLLATE NOCASE"))
