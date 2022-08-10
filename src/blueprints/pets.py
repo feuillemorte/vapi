@@ -53,7 +53,7 @@ class Pets(MethodView):
         return db.select_by_id(TABLE_NAME, inserted_id)
 
 
-@pets_blueprint.route("/id/<pet_id>")
+@pets_blueprint.route("/id/<int:pet_id>")
 class PetsById(MethodView):
     @staticmethod
     @pets_blueprint.response(200, PetResponseSchema)
@@ -94,7 +94,7 @@ class PetsById(MethodView):
             abort(500, message="Delete failed for unkown reasons.")
 
 
-@pets_blueprint.route("/name/<pet_name>")
+@pets_blueprint.route("/name/<string:pet_name>")
 class PetsByName(MethodView):
     @staticmethod
     @pets_blueprint.response(200, PetResponseSchema)
