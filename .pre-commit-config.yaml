@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace
         language_version: python3
@@ -9,12 +9,12 @@ repos:
         language_version: python3
 
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v3.0.1
+    rev: v3.9.0
     hooks:
       - id: reorder-python-imports
         language_version: python3
   - repo: https://github.com/psf/black
-    rev: 22.3.0
+    rev: 22.12.0
     hooks:
       - id: black
         args:
@@ -24,7 +24,7 @@ repos:
         language_version: python3
         require_serial: true
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.32.0
+    rev: v3.3.1
     hooks:
       - id: pyupgrade
         language_version: python3
@@ -34,7 +34,7 @@ repos:
   # W0603 - Using the global statement
   # C0114,C0115,C0116 - docstring checks. Disabled because of pydocstyle checks
   - repo: https://github.com/PyCQA/pylint
-    rev: v2.13.5
+    rev: v2.15.10
     hooks:
       - id: pylint
         args:
@@ -49,7 +49,7 @@ repos:
   # D104 - allows missing docstring in __init__.py
   # D107 - allows missing docstring in __init__ magic
   - repo: https://github.com/PyCQA/pydocstyle
-    rev: 6.1.1
+    rev: 6.2.3
     hooks:
       - id: pydocstyle
         args:
