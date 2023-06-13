@@ -1,0 +1,30 @@
+.title {
+    color: #D8DBE2;
+    text-align: center;
+    margin: 50px 10px 0 10px;
+    font-size: 50px;
+}
+
+.form {
+    margin: 10px;
+}
+
+.label {
+    color: #D8DBE2;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.input {
+    color: #D8DBE2;
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px 0;
+}

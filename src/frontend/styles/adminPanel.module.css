@@ -1,0 +1,12 @@
+.title {
+    color: #D8DBE2;
+    text-align: center;
+    margin: 50px;
+    font-size: 50px;
+}
+
+.addPetButton {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}

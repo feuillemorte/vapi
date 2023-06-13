@@ -3,11 +3,10 @@ from datetime import datetime
 from datetime import timezone
 
 import marshmallow as ma
+from backend import db
 from flask.views import MethodView
 from flask_smorest import abort
 from flask_smorest import Blueprint
-
-from src import db
 
 TABLE_NAME = "pets"
 
@@ -17,6 +16,8 @@ class PetResponseSchema(ma.Schema):
 
     id = ma.fields.Int(dump_only=True, required=False)
     name = ma.fields.String()
+    description = ma.fields.String()
+    img_url = ma.fields.String()
     created = ma.fields.AwareDateTime(format="%Y-%m-%dT%H:%M:%SZ", required=False, missing=datetime.now(timezone.utc))
     updated = ma.fields.AwareDateTime(format="%Y-%m-%dT%H:%M:%SZ", required=False, missing=datetime.now(timezone.utc))
 
@@ -25,9 +26,11 @@ class PetRequestSchema(ma.Schema):
     """Pet schema for API POST/PUT requests."""
 
     name = ma.fields.String()
+    description = ma.fields.String()
+    img_url = ma.fields.String()
 
 
-pets_blueprint = Blueprint("pets", "pets", url_prefix="/pets", description="Operations on pets")
+pets_blueprint = Blueprint("pets", "pets", description="Operations on pets")
 
 
 @pets_blueprint.route("/")
@@ -47,7 +50,9 @@ class Pets(MethodView):
             abort(400, message="The pet name is empty. Empty names are not allowed.")
         if db.is_exists(TABLE_NAME, "name", data["name"]):
             abort(400, message=f"Item with the name '{data['name']}' is already exists.")
-        inserted_id = db.insert(TABLE_NAME, ["name"], [data["name"]])
+        inserted_id = db.insert(
+            TABLE_NAME, ["name", "description", "img_url"], [data["name"], data["description"], data["img_url"]]
+        )
         if not inserted_id:
             abort(500, message="Insert failed for unkown reasons.")
         return db.select_by_id(TABLE_NAME, inserted_id)

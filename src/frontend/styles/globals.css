@@ -1,0 +1,23 @@
+body {
+    font-family: 'Rubik', sans-serif !important;
+    background-color: #373F51;
+}
+
+html, body, .container-fluid, #__next, #__next>div {
+    height: 100%
+}
+
+.btn {
+    background-color: #373F51;
+    color: #58A4B0;
+    padding: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0;
+    margin: 50px;
+}
+
+.btn:hover {
+    background-color: #58A4B0;
+    color: #D8DBE2;
+}

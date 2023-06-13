@@ -1,0 +1,27 @@
+.card {
+    width: 200px;
+    background-color: #D8DBE2;
+    margin: 50px;
+}
+
+.cardImage {
+    width: 198px;
+}
+
+.cardBody {
+    padding: 0%;
+}
+
+.cardTitle {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 10px;
+    padding: 0;
+}
+
+.cardDetails {
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+}

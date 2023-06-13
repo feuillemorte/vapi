@@ -1,0 +1,38 @@
+#container {
+    background-image: url("/img/banner.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 100px;
+}
+
+#header {
+    text-align: center;
+    margin: 100px 0 100px 0;
+    font-size: 70px;
+    font-weight: 700;
+    color: #A9BCD0;
+    padding: 0px;
+    margin: 30px;
+}
+
+#header p {
+    margin: 0;
+}
+
+#title {
+    text-align: center;
+    font-size: 35px;
+    color: #373F51;
+}
+
+#title p {
+    margin: 0;
+    padding: 0;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+}

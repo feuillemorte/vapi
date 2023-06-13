@@ -1,0 +1,27 @@
+.card {
+    background-color: #D8DBE2;
+    margin: 50px;
+}
+
+.cardBody {
+    padding: 150px;
+}
+
+.cardTitle {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 30px;
+    padding: 0;
+}
+
+.cardText {
+    font-size: 20px;
+    white-space: pre-line;
+}
+
+.cardDetails {
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+}
